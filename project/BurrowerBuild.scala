@@ -34,14 +34,6 @@ object BurrowerBuild extends Build {
 
   enablePlugins(DockerPlugin)
 
-  mappings in Universal <++= (packageBin in Compile, sourceDirectory) map { (_, src) =>
-    packageMapping(
-      (src / "main" / "resources") -> "conf"
-    ).withContents().mappings.map {
-      case (f, p) => (f.asInstanceOf[java.io.File], p)
-    }.toSeq
-  }
-
   dockerRepository := Some("omnistac-docker-local.jfrog.io/omnistac")
 
   dockerBaseImage := "frolvlad/alpine-oraclejdk8"
